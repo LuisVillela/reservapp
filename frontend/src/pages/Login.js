@@ -14,14 +14,17 @@ const Login = () => {
       const response = await axios.post('http://localhost:5001/login', { username, password });
       setMessage(response.data.message);
       if (response.status === 200) {
-        // Redirigir a Profile con el userId
-        const userId = response.data.user.id; // Asegúrate de que 'id' viene de la respuesta del backend
-        navigate(`/profile/${userId}`);
+        const userId = response.data.userId;
+        localStorage.setItem('userId', userId); // Guardar en localStorage
+        navigate(`/profile/${userId}`);      
       }
     } catch (error) {
+      console.error('Error en el login:', error); // Loguea el error completo
       setMessage(error.response?.data?.message || 'Error al iniciar sesión');
     }
   };
+  
+  
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

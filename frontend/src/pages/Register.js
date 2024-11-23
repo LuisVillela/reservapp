@@ -14,14 +14,15 @@ const Register = () => {
       const response = await axios.post('http://localhost:5001/register', { username, password });
       setMessage(response.data.message);
       if (response.status === 201) {
-        // Redirigir a la página de perfil con el userId
-        const userId = response.data.userId; // Captura el userId desde la respuesta del backend
-        navigate(`/profile/${userId}`);
+        const userId = response.data.userId; // Capturamos el userId
+        localStorage.setItem('userId', userId); // Guardamos el userId en localStorage
+        navigate(`/profile/${userId}`); // Redirigimos al perfil del usuario
       }
     } catch (error) {
       setMessage(error.response?.data?.message || 'Error al registrar usuario');
     }
   };
+  
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">

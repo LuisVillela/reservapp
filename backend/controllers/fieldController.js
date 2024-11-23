@@ -2,30 +2,31 @@ const db = require('../config/db');
 
 // Crear una nueva cancha
 exports.createField = (req, res) => {
-    const { name, location, status, image_url } = req.body;
-    const admin_id = req.user.id; // Este es el id del usuario autenticado
-
+    const { name, location, status, image_url, admin_id } = req.body;
+  
     const query = 'INSERT INTO fields (name, location, status, image_url, admin_id) VALUES (?, ?, ?, ?, ?)';
     db.query(query, [name, location, status, image_url, admin_id], (err, result) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).json({ error: 'Database error' });
-        }
-        res.status(201).json({ message: 'Field created successfully', fieldId: result.insertId });
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Database error' });
+      }
+      res.status(201).json({ message: 'Field created successfully', fieldId: result.insertId });
     });
-};
+  };
+  
 
 // Obtener todas las canchas
 exports.getFields = (req, res) => {
     const query = 'SELECT * FROM fields';
     db.query(query, (err, results) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).json({ error: 'Database error' });
-        }
-        res.status(200).json(results);
+      if (err) {
+        console.error('Error fetching fields:', err);
+        return res.status(500).json({ error: 'Database error' });
+      }
+      res.status(200).json(results);
     });
-};
+  };
+  
 
 // Actualizar una cancha (solo por su creador)
 exports.updateField = (req, res) => {

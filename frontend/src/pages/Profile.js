@@ -44,7 +44,8 @@ const Profile = () => {
         </div>
       </div>
 
-      <BottomNav />
+      {/* Pasar el userId como prop */}
+      <BottomNav userId={userId} />
     </div>
   );
 };

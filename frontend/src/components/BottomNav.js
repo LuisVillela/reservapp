@@ -4,13 +4,14 @@ import { UserIcon, CalendarDaysIcon, TrophyIcon, Cog6ToothIcon } from '@heroicon
 
 const BottomNav = () => {
   const navigate = useNavigate();
+  const userId = localStorage.getItem('userId'); // Obtener el userId del localStorage
 
   return (
     <nav className="bg-white fixed bottom-0 left-0 w-full border-t border-gray-300 py-3 px-4">
       <div className="flex justify-around py-2">
         {/* Profile */}
         <button
-          onClick={() => navigate('/profile')}
+          onClick={() => navigate(`/profile/${userId}`)}
           className="flex flex-col items-center text-gray-700 hover:text-blue-500"
         >
           <UserIcon className="h-6 w-6" />
@@ -28,7 +29,7 @@ const BottomNav = () => {
 
         {/* Torneos */}
         <button
-          onClick={() => navigate('/torneos')}
+          onClick={() => navigate(`/torneos/${userId}`)}
           className="flex flex-col items-center text-gray-700 hover:text-blue-500"
         >
           <TrophyIcon className="h-6 w-6" />
@@ -37,7 +38,7 @@ const BottomNav = () => {
 
         {/* Settings */}
         <button
-          onClick={() => navigate('/settings')}
+          onClick={() => navigate('/settings')} // Siempre lleva a `/settings`
           className="flex flex-col items-center text-gray-700 hover:text-blue-500"
         >
           <Cog6ToothIcon className="h-6 w-6" />
