@@ -17,6 +17,7 @@ function App() {
       <Routes>
         {/* Ruta principal */}
         <Route path="/" element={<Main />} />
+        <Route path="/main" element={<Main />} />
 
         {/* Registro y Login */}
         <Route path="/register" element={<Register />} />
@@ -24,6 +25,8 @@ function App() {
 
         {/* Perfil del usuario */}
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:userId" element={<Profile />} />
+
 
         {/* Agenda de canchas */}
         <Route path="/agenda" element={<Agenda />} />
